@@ -10,8 +10,6 @@ import org.junit.Before
 import org.junit.Test
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.File
-
 
 class MTApiUnitTest {
     private lateinit var server: MockWebServer
@@ -29,19 +27,14 @@ class MTApiUnitTest {
 
     @Test
     fun getAccountsTest() {
-        server.enqueue(MockResponse().apply {
-            val uri = javaClass.classLoader!!.getResource("accounts.json")
-            val file = File(uri.path)
-            setBody(String(file.readBytes()))
-        })
-
+        server.enqueue(MockResponse().apply { setBody(ResourceUtil.getAccounts() ?: "") })
         val mtApi = Retrofit.Builder()
             .baseUrl(server.url(""))
             .addConverterFactory(GsonConverterFactory.create()).build()
             .create(MTApi::class.java)
-        val accountWrapper = mtApi.getAccounts(0).execute().body()
-        assertNotNull(accountWrapper!!.data)
-        assertEquals(accountWrapper.data.size, 3)
+        val accountsWrapper = mtApi.getAccounts(0).execute().body()
+        assertNotNull(accountsWrapper!!.data)
+        assertEquals(accountsWrapper.data.size, 3)
     }
 
 }

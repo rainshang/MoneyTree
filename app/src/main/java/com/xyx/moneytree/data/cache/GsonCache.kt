@@ -2,12 +2,15 @@ package com.xyx.moneytree.data.cache
 
 import androidx.annotation.WorkerThread
 import com.google.gson.Gson
+import com.google.gson.JsonIOException
+import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
 import com.xyx.moneytree.data.api.ResponseListWrapper
 import com.xyx.moneytree.vo.Account
 import com.xyx.moneytree.vo.Transaction
+import java.io.FileNotFoundException
 import java.io.FileReader
-import java.io.IOException
+import java.io.FileWriter
 
 object GsonCache {
     private const val ACCOUNT_FILE = "accounts.json"
@@ -23,9 +26,20 @@ object GsonCache {
                 FileReader(cacheDir + ACCOUNT_FILE),
                 object : TypeToken<ResponseListWrapper<Account>>() {}.type
             )
-        } catch (e: IOException) {
-            null
+        } catch (e: Exception) {
+            when (e) {
+                is JsonIOException,
+                is JsonSyntaxException,
+                is FileNotFoundException -> null
+                else -> throw e
+            }
         }
+    }
+
+    @WorkerThread
+    @Throws(JsonIOException::class)
+    fun saveAccounts(accountsWrapper: ResponseListWrapper<Account>) {
+        gson.toJson(accountsWrapper, FileWriter(cacheDir + ACCOUNT_FILE))
     }
 
 
@@ -37,7 +51,11 @@ object GsonCache {
                 object : TypeToken<ResponseListWrapper<Transaction>>() {}.type
             )
         } catch (e: Exception) {
-            null
+            when (e) {
+                is JsonIOException,
+                is JsonSyntaxException -> null
+                else -> throw e
+            }
         }
     }
 }
