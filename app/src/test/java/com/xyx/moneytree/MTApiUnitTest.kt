@@ -1,14 +1,16 @@
 package com.xyx.moneytree
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
+import com.xyx.moneytree.data.MTRepo
+import com.xyx.moneytree.data.api.MTApi
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
+import java.io.File
+import kotlin.reflect.full.declaredMembers
+import kotlin.reflect.full.memberProperties
 
-@RunWith(AndroidJUnit4::class)
+
 class MTApiUnitTest {
     private lateinit var server: MockWebServer
 
@@ -24,8 +26,9 @@ class MTApiUnitTest {
 
     @Test
     fun getAccountsTest() {
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-//        server.enqueue(MockResponse().setBody(Mockre))
+        val uri = javaClass.classLoader!!.getResource("accounts.json")
+        val file = File(uri.path)
+        println(String(file.readBytes()))
     }
 
 }
