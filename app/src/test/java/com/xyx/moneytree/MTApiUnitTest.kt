@@ -28,10 +28,8 @@ class MTApiUnitTest {
     @Test
     fun getAccountsTest() {
         server.enqueue(MockResponse().apply { setBody(ResourceUtil.getAccounts() ?: "") })
-        val mtApi = Retrofit.Builder()
-            .baseUrl(server.url(""))
-            .addConverterFactory(GsonConverterFactory.create()).build()
-            .create(MTApi::class.java)
+
+        val mtApi = MTApi.getInstance(server.url("").toString())
         val accountsWrapper = mtApi.getAccounts(0).execute().body()
         assertNotNull(accountsWrapper!!.data)
         assertEquals(accountsWrapper.data.size, 3)

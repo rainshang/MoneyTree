@@ -10,6 +10,6 @@ class CacheNoInitTest {
 
     @Test(expected = UninitializedPropertyAccessException::class)
     fun initDirMustCallTest() {
-        GsonCache.cacheDir
+        GsonCache.getAccounts()
     }
 }
