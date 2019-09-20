@@ -34,10 +34,9 @@ class AccountsFragment : Fragment() {
     }
 
     private fun updateUI(accounts: List<Account>) {
-        tv_total_count.text =
+        val s =
             "JPY${DecimalFormat("#,###").format(accounts.sumByDouble { it.currentBalanceInBase })}"
-
-
+        tv_total_count.text = s
     }
 
 }
