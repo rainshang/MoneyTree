@@ -1,6 +1,9 @@
 package com.xyx.moneytree
 
-import android.content.Intent
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.xyx.moneytree.data.MTRepo
@@ -14,7 +17,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class MainScreenAccountFetchTest {
+class MainActivityTest {
 
     @get:Rule
     var activityRule: ActivityTestRule<MainActivity> =
@@ -34,10 +37,12 @@ class MainScreenAccountFetchTest {
     }
 
     @Test
-    fun firTest() {
+    fun getAccountsAndDisplayTest() {
         server.enqueue(MockResponse().apply { setBody(ResourceUtil.getAccounts() ?: "") })
-
         MTRepo.mtApi = MTApi.getInstance(server.url("").toString())
-        activityRule.launchActivity(Intent())
+        activityRule.launchActivity(null)
+        onView(withText("JPY5,341")).check(matches(isDisplayed()))
+//        InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+//        onView(withId(R.id.tv_total_count)).check(matches(withText("JPY5,341")))
     }
 }
