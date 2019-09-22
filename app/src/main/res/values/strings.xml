@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">MoneyTree</string>
+    <string name="app_name">MoneytreeLight</string>
+    <string name="jpy_format">JPY%1$s</string>
 </resources>

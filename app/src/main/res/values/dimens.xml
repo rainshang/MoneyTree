@@ -1,0 +1,10 @@
+<resources>
+    <dimen name="text_actionbar">40sp</dimen>
+    <dimen name="padding_actionbar_content">15dp</dimen>
+    <dimen name="padding_item">10dp</dimen>
+    <dimen name="height_divider_account">1px</dimen>
+    <dimen name="height_divider_transaction">1dp</dimen>
+    <dimen name="text_item_header">20sp</dimen>
+    <dimen name="text_item_normal">17sp</dimen>
+    <dimen name="text_item_amount">19sp</dimen>
+</resources>

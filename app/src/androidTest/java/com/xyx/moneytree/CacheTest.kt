@@ -1,12 +1,13 @@
 package com.xyx.moneytree
 
+import ResourceUtil
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.gson.Gson
 import com.xyx.moneytree.data.api.ResponseListWrapper
 import com.xyx.moneytree.data.cache.GsonCache
-import com.xyx.moneytree.vo.Account
-import org.junit.Assert.assertNull
+import com.xyx.moneytree.data.vo.Account
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -21,7 +22,7 @@ class CacheTest {
 
     @Test
     fun getAccountsWhenNoCacheTest() {
-        assertNull(GsonCache.getAccounts())
+        Assert.assertNull(GsonCache.getAccounts())
     }
 
     @Test

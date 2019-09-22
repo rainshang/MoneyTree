@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="group"
+            type="com.xyx.moneytree.fragment.accounts.Adapter.Group" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:background="@color/colorSecondary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_item"
+            android:layout_marginTop="@dimen/padding_item"
+            android:layout_marginBottom="@dimen/padding_item"
+            android:text="@{group.name}"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_item_header"
+            android:textStyle="bold"
+            tools:text="Starbucks Card" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_divider_account"
+            android:layout_marginStart="@dimen/padding_item"
+            android:background="@android:color/white" />
+    </LinearLayout>
+</layout>

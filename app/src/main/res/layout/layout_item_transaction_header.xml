@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.xyx.moneytree.fragment.AmountUtil" />
+
+        <variable
+            name="group"
+            type="com.xyx.moneytree.fragment.transactions.Adapter.Group" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:background="@color/colorSecondary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_item"
+            android:layout_marginTop="@dimen/padding_item"
+            android:layout_marginBottom="@dimen/padding_item"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{group.name}"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_item_header"
+                tools:text="February 2018" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_item"
+                android:text="@{group.positiveAmount > 0 ? @string/jpy_format(AmountUtil.formatAmount(group.positiveAmount)) : null}"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_item_normal"
+                tools:text="JPY5,000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_item"
+                android:text="@{group.negativeAmount &lt; 0 ? @string/jpy_format(AmountUtil.formatAmount(group.negativeAmount)) : null}"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_item_normal"
+                tools:text="-JPY2,200" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_divider_account"
+            android:layout_marginStart="@dimen/padding_item"
+            android:background="@android:color/white" />
+    </LinearLayout>
+</layout>

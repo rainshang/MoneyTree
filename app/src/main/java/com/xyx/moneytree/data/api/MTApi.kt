@@ -1,8 +1,8 @@
 package com.xyx.moneytree.data.api
 
-import com.xyx.moneytree.BuildConfig
-import com.xyx.moneytree.vo.Account
-import com.xyx.moneytree.vo.Transaction
+import com.getmoneytree.moneytreelight.BuildConfig
+import com.xyx.moneytree.data.vo.Account
+import com.xyx.moneytree.data.vo.Transaction
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -10,6 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface MTApi {
 
@@ -43,10 +44,10 @@ interface MTApi {
             .build()
     }
 
-    @GET("account/{timestamp}")
-    fun getAccounts(@Path("timestamp") timestamp: Int): Call<ResponseListWrapper<Account>>
+    @GET("account")
+    fun getAccounts(@Query("timestamp") timestamp: Int): Call<ResponseListWrapper<Account>>
 
-    @GET("account/{id}/transaction/{timestamp}")
-    fun getTransactions(@Path("id") id: Int): Call<ResponseListWrapper<Transaction>>
+    @GET("account/{id}/transaction")
+    fun getTransactions(@Path("id") id: Int, @Query("timestamp") timestamp: Int): Call<ResponseListWrapper<Transaction>>
 
 }

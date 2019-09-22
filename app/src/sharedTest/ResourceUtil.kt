@@ -1,8 +1,4 @@
-package com.xyx.moneytree
-
-
 object ResourceUtil {
-
     private fun getJsonString(fileName: String) =
         javaClass.getResourceAsStream(fileName)?.let {
             val string = String(it.readBytes())
@@ -12,4 +8,5 @@ object ResourceUtil {
 
     fun getAccounts() = getJsonString("/accounts.json")
 
+    fun getTransactions(uid: Int) = getJsonString("transactions_$uid.json")
 }

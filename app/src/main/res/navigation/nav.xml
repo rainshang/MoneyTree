@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/accountsFragment"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/accountsFragment"
+        android:name="com.xyx.moneytree.fragment.accounts.AccountsFragment"
+        android:label="AccountsFragment"
+        tools:layout="@layout/accounts_fragment">
+        <action
+            android:id="@+id/action_accountsFragment_to_transactionsFragment"
+            app:destination="@id/transactionsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionsFragment"
+        android:name="com.xyx.moneytree.fragment.transactions.TransactionsFragment"
+        android:label="transactions_fragment"
+        tools:layout="@layout/transactions_fragment">
+        <argument
+            android:name="account"
+            app:argType="com.xyx.moneytree.data.vo.Account" />
+    </fragment>
+</navigation>

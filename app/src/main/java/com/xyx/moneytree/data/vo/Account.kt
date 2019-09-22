@@ -1,8 +1,10 @@
-package com.xyx.moneytree.vo
+package com.xyx.moneytree.data.vo
 
-
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Account(
     @SerializedName("currency")
     val currency: String,
@@ -16,4 +18,4 @@ data class Account(
     val institution: String,
     @SerializedName("name")
     val name: String
-)
+) : Parcelable

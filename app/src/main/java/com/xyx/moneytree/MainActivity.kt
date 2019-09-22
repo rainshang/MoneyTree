@@ -2,8 +2,9 @@ package com.xyx.moneytree
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
+import com.getmoneytree.moneytreelight.R
 import com.xyx.moneytree.data.cache.GsonCache
-import com.xyx.moneytree.fragment.accounts.AccountsFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,9 +12,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         GsonCache.initWithContext(applicationContext)
 
+        val navHostFragment = NavHostFragment.create(R.navigation.nav)
         supportFragmentManager
             .beginTransaction()
-            .add(android.R.id.content, AccountsFragment())
+            .replace(android.R.id.content, navHostFragment)
+            .setPrimaryNavigationFragment(navHostFragment)
             .commit()
     }
 }

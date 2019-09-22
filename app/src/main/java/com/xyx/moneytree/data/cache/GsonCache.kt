@@ -2,13 +2,13 @@ package com.xyx.moneytree.data.cache
 
 import android.content.Context
 import androidx.annotation.WorkerThread
+import com.xyx.moneytree.data.vo.Account
+import com.xyx.moneytree.data.vo.Transaction
 import com.google.gson.Gson
 import com.google.gson.JsonIOException
 import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
 import com.xyx.moneytree.data.api.ResponseListWrapper
-import com.xyx.moneytree.vo.Account
-import com.xyx.moneytree.vo.Transaction
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileReader
@@ -52,7 +52,6 @@ object GsonCache {
         gson.toJson(accountsWrapper, FileWriter(cacheDir + ACCOUNT_FILE))
     }
 
-
     @WorkerThread
     fun getTransactions(uid: Int): ResponseListWrapper<Transaction>? {
         return try {
@@ -63,9 +62,16 @@ object GsonCache {
         } catch (e: Exception) {
             when (e) {
                 is JsonIOException,
-                is JsonSyntaxException -> null
+                is JsonSyntaxException,
+                is FileNotFoundException -> null
                 else -> throw e
             }
         }
+    }
+
+    @WorkerThread
+    @Throws(JsonIOException::class)
+    fun saveTransactions(uid: Int, accountsWrapper: ResponseListWrapper<Transaction>) {
+        gson.toJson(accountsWrapper, FileWriter(cacheDir + TRANSACTION_FILE.format(uid)))
     }
 }

@@ -1,7 +1,7 @@
-package com.xyx.moneytree.vo
-
+package com.xyx.moneytree.data.vo
 
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class Transaction(
     @SerializedName("account_id")
@@ -12,6 +12,7 @@ data class Transaction(
     val categoryId: Int,
     @SerializedName("date")
     val date: String,
+    var calendar: Calendar?,
     @SerializedName("description")
     val description: String,
     @SerializedName("id")
